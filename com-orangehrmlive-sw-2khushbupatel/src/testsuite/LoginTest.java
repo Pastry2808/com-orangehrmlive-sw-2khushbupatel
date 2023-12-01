@@ -2,6 +2,7 @@ package testsuite;
 
 import browserfactory.BaseTest;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -15,7 +16,7 @@ public class LoginTest extends BaseTest {
         openBrowser(baseUrl);
     }
     @Test
-    public void userShouldLoginSuccessfullyWithValidCredentials(){
+    public void userShouldLoginSuccessfullyWithValidCredentials() throws InterruptedException {
 //        * Enter “Admin” username
         WebElement userName = driver.findElement(By.name("username"));
         userName.sendKeys("Admin");
@@ -26,10 +27,11 @@ public class LoginTest extends BaseTest {
         WebElement loginLink = driver.findElement(By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--main orangehrm-login-button']"));
         loginLink.click();
 //        * Verify the ‘Dashboard’ text is display
-//        String actualResult = driver.findElement(By.xpath("//div[@id='app']/div/div/header/div[1]/div[1]/span/h6")).getText();
-//        System.out.println(actualResult);
-//        String expectedResult = "Dashboard";
-//        Assert.assertEquals(actualResult,expectedResult);
+        Thread.sleep(5000);
+        String actualResult = driver.findElement(By.xpath("//div[@id='app']/div/div/header/div[1]/div[1]/span/h6")).getText();
+        System.out.println(actualResult);
+        String expectedResult = "Dashboard";
+        Assert.assertEquals(actualResult,expectedResult);
     }
     @After
     public void endTest(){
